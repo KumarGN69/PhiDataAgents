@@ -10,26 +10,14 @@ response = model.chat(
     messages=[
         {
             "role":"user",
-            "content":"What color is the sky at different times of the day?"
+            "content":"What color is the sky at different times of the day?Respond in JSON format"
         }
     ],
     
 )
+
 print(response['message']['content'])
 
-# from ollama import chat
-# from ollama import ChatResponse
 
-# response: ChatResponse = chat(
-#     model='llama3.2', 
-#     messages=[
-#         {
-#             'role': 'user',
-#             'content': 'Why is the sky blue?',
-#         },
-#     ]
-# )
-
-# print(response['message']['content'])
 
 

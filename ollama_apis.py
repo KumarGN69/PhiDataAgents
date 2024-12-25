@@ -12,18 +12,18 @@ options ={
     },
     "keep_alive":0,
     "max_retries":1,
-    # "messages":[
-    #     {
-    #         "role":"user",
-    #         "content":"Respond using JSON"
-    #     }
-    # ]
+    "messages":[
+        {
+            "role":"user",
+            "content":"Respond using JSON"
+        }
+    ]
 }
 
 
 result = requests.post(url='http://localhost:11434/api/generate/',json=options, headers=headers)
 
 result_json=json.loads(result.text)
-# print(result_json)
-print(type(json.loads(result_json['response'])))
+print(result_json)
+# print(json.loads(result_json['response']))
 
