@@ -5,3 +5,5 @@ pydantic==2.10.3
 python-dotenv==1.0.1
 yfinance==0.2.50
 pydantic_ai==0.0.15
+langchain-ollama==0.2.2
+langchain-community==0.3.13

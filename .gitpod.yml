@@ -5,12 +5,10 @@ tasks:
     before: echo "Hi from Terminal 2"
     init: curl -fsSL https://ollama.com/install.sh  | sh
     command: ollama serve && ollama run llama3.2
-
   
   - name: install and set up the environment  
     init: pip install -r requirements.txt && python -m pip install --upgrade pip
       
-
 
 # List the ports to expose. Learn more: https://www.gitpod.io/docs/configure/workspaces/ports
 ports:
