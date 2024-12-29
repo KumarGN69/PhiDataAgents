@@ -1,30 +1,26 @@
-import openai
-from phi.agent import Agent
-from phi.model.openai import OpenAIChat
-from phi.model.ollama import Ollama
-from phi.tools.yfinance import YFinanceTools
-from langchain_ollama import OllamaLLM, ChatOllama
 from dotenv import load_dotenv
 import os
+import openai
+from phi.agent import Agent
+from phi.model.ollama import Ollama
+from phi.tools.yfinance import YFinanceTools
 
 # Load environment variables from .env file
 load_dotenv()
 
-# Get API key from environment
-openai.api_key = os.getenv("OPENAI_API_KEY")
-
+# intantiate the Ollama object using phiData Ollama integration
 llm = Ollama(
         id="llama3.2",
         name='Ollama',
         host= 'http://localhost:11434',
-        model="llama3.2",
+        model="mistral",
         # format="json",
         temperature=0.0
         )
+
 # Initialize the agent
 finance_agent = Agent(
     name="Finance AI Agent",
-    # model=OpenAIChat(id="gpt-4o"),
     model = llm,
     tools=[
         YFinanceTools(
@@ -40,4 +36,4 @@ finance_agent = Agent(
     show_tool_calls=True,
     markdown=False,
 )
-finance_agent.print_response("Share the TSLA stock price and analyst recommendations", stream=True)
+finance_agent.print_response("Share the NVDA stock price and analyst recommendations", stream=True)
