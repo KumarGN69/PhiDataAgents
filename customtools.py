@@ -1,11 +1,12 @@
 from phi.tools.yfinance import YFinanceTools
-from yfinance import Ticker
 import json
 
 def getnews(symbol:str):
     """
-    :param symbol:
-    :return:
+    Function to get the latest information from yahoo finance portal
+    :param symbol:str stock ticker
+
+    :return: the json format of the information requested
     """
     ticker = YFinanceTools(
         stock_price=False,
@@ -14,8 +15,4 @@ def getnews(symbol:str):
         company_news=True,
         historical_prices=True
     )
-    # ticker = Ticker(ticker=symbol)
     return json.dumps(ticker.get_income_statements(symbol=symbol))
-    # return ticker.get_income_statements(symbol=symbol)
-    # return json.dumps(ticker.income_stmt())
-# print(getnews("NVDA"))

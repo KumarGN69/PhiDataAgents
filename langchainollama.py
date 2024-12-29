@@ -10,5 +10,4 @@ llm = model.getinstance()
 response = llm.invoke(TASK_TO_PERFORM)
 
 #print the output
-print(type(response))
 print(response)
