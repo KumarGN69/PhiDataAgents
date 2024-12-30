@@ -11,11 +11,13 @@ llm = model.getinstance()
 
 #Invoke the model to perform a specific task and store in a list
 # response = [llm.invoke(TASK_TO_PERFORM)]
+
+#Instantiate the custom phiData ScrapeTool and get the website details
 scrape_tool = ScrapeTool(WEBSITE,TASK_TO_PERFORM)
 response = scrape_tool.getwebsitedata()
 
 #print the output
-pprint(response)
+# pprint(response)
 
 #create embeddiing, embedd into a vector store
 vector_store = model.create_vectorstore(response)

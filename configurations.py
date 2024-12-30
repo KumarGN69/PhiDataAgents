@@ -10,7 +10,7 @@ MODEL_TEMPERATURE = 0.0
 
 #Prompts for the task to be performed
 TASK_TO_PERFORM = "What is the color of the sky at different times of a day?What are the reasons for it?"
-SEARCH_STRING= "What is the color of the night sky and why is it so?"
+SEARCH_STRING= "How do astronomers at Royal Observatory Greenwich explain the color of the sky at sunrise?"
 
 #Instructions to the agents
 WEBSITE = "https://www.rmg.co.uk/stories/topics/why-sky-blue"

@@ -57,6 +57,7 @@ class LLMModel:
             )
         doc_list = text_splitter.create_documents(input_text)
         documents = text_splitter.split_documents(doc_list)
+        # print (documents)
         vector_store = Chroma(
             collection_name="vector_collection",
             embedding_function=self.create_embedding(),
