@@ -1,5 +1,5 @@
 from pprint import pprint
-from llm import LLMModel
+from custom_llm import LLMModel
 from configurations import TASK_TO_PERFORM, SEARCH_STRING
 
 #instantiating the custom model

@@ -5,6 +5,6 @@ MODEL_TEMP = 0.0
 
 #Prompts for the task to be performed
 TASK_TO_PERFORM = "What is the color of the sky at different times of a day?"
-SEARCH_STRING= "What is color of the sky at Night "
+SEARCH_STRING= "Night"
 
 #Instructions to the agents
