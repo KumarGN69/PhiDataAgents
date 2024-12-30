@@ -1,3 +1,4 @@
+import os
 from pprint import pprint
 from custom_llm import LLMModel
 from configurations import TASK_TO_PERFORM, SEARCH_STRING
@@ -6,17 +7,33 @@ from configurations import TASK_TO_PERFORM, SEARCH_STRING
 model = LLMModel()
 llm = model.getinstance()
 
-
 #Invoke the model to perform a specific task and store in a list
-response= []
-response.append( llm.invoke(TASK_TO_PERFORM))
+response = [llm.invoke(TASK_TO_PERFORM)]
 
 #print the output
-print(response)
+# pprint(response)
 
 #create embeddiing, embedd into a vector store
 vector_store = model.create_vectorstore(response)
-# do a similarity search by query
-results = vector_store.similarity_search(query=SEARCH_STRING,k=1)
-pprint("\\n\\n")
-pprint(results)
+# do a similarity search on vector DB for a specific query
+results = vector_store.similarity_search(query=SEARCH_STRING,k=5)
+# pprint(results)
+#get the Ollama Client interface to the model
+client = model.getclientinterface()
+#generate a llm response using client along with the RAG results
+final_answer = client.generate(
+    model=model.MODEL_NAME,
+    prompt=f"{SEARCH_STRING}.Answer using the {results} from vector store"
+)
+pprint(final_answer.response)
+#chat with the llm using the RAG results
+# final_answer = client.chat(
+#     model=model.MODEL_NAME,
+#     messages=[
+#         {
+#             "role": "user",
+#             "content": f"{SEARCH_STRING}.Answer using the {results} from vector store"
+#         }
+#     ],
+# )
+# pprint(final_answer['message']['content'])

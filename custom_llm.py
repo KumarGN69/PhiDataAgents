@@ -3,7 +3,9 @@ from dotenv import load_dotenv
 from langchain_ollama import OllamaLLM, OllamaEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from configurations import LLM_MODEL_TO_USE, OUTPUT_FORMAT, MODEL_TEMP
+from ollama import Client
+from configurations import OUTPUT_FORMAT, MODEL_TEMPERATURE
+
 class LLMModel:
     """
     This class defines the a custom model using Ollama
@@ -18,8 +20,7 @@ class LLMModel:
         self.MODEL_URL = os.getenv("BASE_URL")
         self.API_KEY = os.getenv("API_KEY")
         self.MODEL_NAME = os.getenv("MODEL_NAME")
-        # self.MODEL_NAME= "mistral"
-        self.temperature = 0.0
+        self.temperature = MODEL_TEMPERATURE
     def getinstance(self):
         """Return the handle to the specific custom model
         return: OllamaLLM model with requisite configuration
@@ -27,9 +28,9 @@ class LLMModel:
         return OllamaLLM(
             base_url=self.MODEL_URL,
             api_key=self.API_KEY,
-            model=LLM_MODEL_TO_USE,
+            model=self.MODEL_NAME,
             # format=OUTPUT_FORMAT,
-            temperature=MODEL_TEMP
+            temperature=MODEL_TEMPERATURE
         )
     def create_embedding(self) -> OllamaEmbeddings:
         """create embedding
@@ -37,7 +38,7 @@ class LLMModel:
         """
         embeddings = OllamaEmbeddings(
             base_url=self.MODEL_URL,
-            model=LLM_MODEL_TO_USE,
+            model=self.MODEL_NAME,
         )
         return embeddings
 
@@ -62,6 +63,11 @@ class LLMModel:
             persist_directory="./chroma_langchain.db"
          )
         vector_store.add_documents(documents)
-        # vector_store.
 
         return vector_store
+    def getclientinterface(self)->Client:
+        """
+        Returns the Ollama client for a chat/generate/create interface
+        :return: ollama Client object
+        """
+        return Client(self.MODEL_URL)
