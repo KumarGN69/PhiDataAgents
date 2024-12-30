@@ -4,6 +4,7 @@ OUTPUT_FORMAT = "json"
 MODEL_TEMP = 0.0
 
 #Prompts for the task to be performed
-TASK_TO_PERFORM = "Why is the sky blue in color?"
+TASK_TO_PERFORM = "What is the color of the sky at different times of a day?"
+SEARCH_STRING= "What is color of the sky at Night "
 
 #Instructions to the agents
