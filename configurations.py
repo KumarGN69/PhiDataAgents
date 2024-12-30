@@ -13,3 +13,4 @@ TASK_TO_PERFORM = "What is the color of the sky at different times of a day?What
 SEARCH_STRING= "What is the color of the night sky and why is it so?"
 
 #Instructions to the agents
+WEBSITE = "https://www.rmg.co.uk/stories/topics/why-sky-blue"
