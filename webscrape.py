@@ -5,10 +5,9 @@ from phi.tools import Toolkit
 from configurations import WEBSITE
 class ScrapeTool(Toolkit):
 
-    def __init__(self,url:str,message:str):
+    def __init__(self,url:str):
         super().__init__(name="scrape tools")
         self.url = url
-        self.message = message
 
     def getwebsitedata(self)->str:
         """Posts a get request to scrape a website using BeautifulSoup.
@@ -25,20 +24,16 @@ class ScrapeTool(Toolkit):
         else:
             # Parse the HTML content of the page with BeautifulSoup
             soup = BeautifulSoup(response.content, 'html.parser')
-
-            # fina all paragraphs in the web content
+            # find all paragraphs in the web content
             p_tags = soup.find_all('p')
-            # create a list of all web content
-            web_content = []
+            #Create a list of str
+            webtext_list =[]
             for tag in p_tags:
-                web_content.append(tag.text)
+                webtext_list.append(tag.text)
             # append the paragraph contents into one large string
             web_text = ''.join(tag.text for tag in p_tags )
-            # print(type(web_text))
-            # print(web_text)
-            return web_text
+            return webtext_list
 
 # if __name__ == "__main__" :
 #     scrape_tool = ScrapeTool(WEBSITE,"")
-#     # print(scrape_tool.getwebsitedata())
-#     scrape_tool.getwebsitedata()
+#     print(scrape_tool.getwebsitedata())

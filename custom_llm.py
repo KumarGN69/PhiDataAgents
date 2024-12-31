@@ -21,6 +21,7 @@ class LLMModel:
         self.API_KEY = os.getenv("API_KEY")
         self.MODEL_NAME = os.getenv("MODEL_NAME")
         self.temperature = MODEL_TEMPERATURE
+        self.EMBED_MODEL = os.getenv("EMBEDDING_MODEL")
     def getinstance(self):
         """Return the handle to the specific custom model
         return: OllamaLLM model with requisite configuration
@@ -38,7 +39,7 @@ class LLMModel:
         """
         embeddings = OllamaEmbeddings(
             base_url=self.MODEL_URL,
-            model=self.MODEL_NAME,
+            model=self.EMBED_MODEL,
         )
         return embeddings
 
@@ -53,9 +54,10 @@ class LLMModel:
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
             chunk_overlap=100,
-            length_function=len
+            # length_function=len
             )
         doc_list = text_splitter.create_documents(input_text)
+        # print(doc_list)
         documents = text_splitter.split_documents(doc_list)
         # print (documents)
         vector_store = Chroma(

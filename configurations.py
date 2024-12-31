@@ -1,5 +1,4 @@
 import os
-import os
 from dotenv import load_dotenv
 # load the env variables
 load_dotenv()
@@ -10,7 +9,10 @@ MODEL_TEMPERATURE = 0.0
 
 #Prompts for the task to be performed
 TASK_TO_PERFORM = "What is the color of the sky at different times of a day?What are the reasons for it?"
-SEARCH_STRING= "How do astronomers at Royal Observatory Greenwich explain the color of the sky at sunrise?"
+SEARCH_STRING= " year of Wifred Doman's premature death in "
 
+PROMPT = (f"Answer the user's query based on the provided context. "
+          f"User's query is {SEARCH_STRING}. "
+          f"Context: ")
 #Instructions to the agents
-WEBSITE = "https://www.rmg.co.uk/stories/topics/why-sky-blue"
+WEBSITE = "https://www.rmg.co.uk/stories/topics/cutty-sark-greenwich-history"
