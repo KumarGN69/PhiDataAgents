@@ -1,36 +1,37 @@
-import os
-from pprint import pprint
 from custom_llm import LLMModel
-from configurations import TASK_TO_PERFORM, SEARCH_STRING, WEBSITE, PROMPT
+from configurations import SEARCH_STRING, WEBSITE, PROMPT
 from webscrape import ScrapeTool
 
+def main():
+    # instantiate the custom model and get the handle to it
+    model = LLMModel()
 
-#instantiating the custom model
-model = LLMModel()
-llm = model.getinstance()
+    # Instantiate the custom phiData ScrapeTool and get the website details
+    scrape_tool = ScrapeTool(url=WEBSITE)
+    response = scrape_tool.getwebsitecontent()
 
-#Invoke the model to perform a specific task and store in a list
-# response = [llm.invoke(TASK_TO_PERFORM)]
+    # create embedding, embedd into a vector store
+    vector_store = model.create_vectorstore(response)
 
-#Instantiate the custom phiData ScrapeTool and get the website details
-scrape_tool = ScrapeTool(url=WEBSITE)
-response = scrape_tool.getwebsitedata()
+    # create a retriever from the vector store
+    retriever = vector_store.as_retriever(
+        search_type="similarity",
+        search_kwargs={"k": 20}
+    )
 
-#print the output
-# pprint(response)
+    # do a similarity search using the vector store retriever on specific search query
+    doclist = retriever.invoke(SEARCH_STRING)
 
-#create embeddiing, embedd into a vector store
-vector_store = model.create_vectorstore(response)
-# do a similarity search on vector DB for a specific query
-doclist = vector_store.similarity_search(query=SEARCH_STRING,k=10)
-results = ''.join(doc.page_content for doc in doclist)
-# print(results)
-#get the Ollama Client interface to the model
-client = model.getclientinterface()
-#generate a llm response using client along with the RAG results
-# print(f"{PROMPT}{results}. Please answer based on the above context. ")
-final_answer = client.generate(
-    model=model.MODEL_NAME,
-    prompt=f"{PROMPT} {results}. Please answer based on the above context "
-)
-print(final_answer.response)
+    # get the Ollama Client interface to the model
+    client = model.getclientinterface()
+
+    # generate a llm response using client along with the RAG results
+    final_answer = client.generate(
+        model=model.MODEL_NAME,
+        prompt=f"{PROMPT} {doclist}. Please answer based on the give context "
+    )
+
+    return final_answer
+
+if __name__ == "__main__":
+    print(main().response)

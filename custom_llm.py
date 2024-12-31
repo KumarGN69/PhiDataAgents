@@ -8,11 +8,21 @@ from configurations import OUTPUT_FORMAT, MODEL_TEMPERATURE
 
 class LLMModel:
     """
-    This class defines the a custom model using Ollama
+    This class defines a custom model for use with Ollama
     --------------------------------------------------------
-    Function getinstance() return the handle the model with specific parameters
-    Takes no argument. For future this can be customize to pass the parameters to configure the llm
-    returns the OllamaLLM model
+    Methods:
+        getinstance() :
+            args: None
+            return: Return the handle the model with specific parameters
+        create_embedding():
+            args: None
+            return: Returns the handle to embedding function
+        create_vectorstore():
+            args: document list as argument
+            return: returns the handle to Chroma vectorDB store
+        getclientinterface():
+            args: None
+            return: handle of the Ollama Client interface of the llm
     """
     def __init__(self):
         """constructor for the LLMModel class and populates the host, api key and the model to use"""
@@ -48,26 +58,26 @@ class LLMModel:
         splits the input text in chunks with overlap,
         create embeddings using OllamaEmbedding add chunks to vector store
         and return the handle to the vector store
-        :param input_text:
-        :return: Chroma vector store
+        :param input_text: list of documents
+        :returns: Chroma vector store
         """
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000,
+            chunk_size=200,
             chunk_overlap=100,
             # length_function=len
             )
+        # use the text splitter to create and split the documents
         doc_list = text_splitter.create_documents(input_text)
-        # print(doc_list)
         documents = text_splitter.split_documents(doc_list)
-        # print (documents)
-        vector_store = Chroma(
-            collection_name="vector_collection",
-            embedding_function=self.create_embedding(),
-            persist_directory="./chroma_langchain.db"
-         )
-        vector_store.add_documents(documents)
 
-        return vector_store
+        # create a persistent Chroma vector store for the list of documents
+        vector_store = Chroma.from_documents(
+            collection_name="vector_collection",
+            documents=documents,
+            embedding=self.create_embedding(),
+            persist_directory="./chroma_langchain.db"
+        )
+        return vector_store # returns the vector store handle
     def getclientinterface(self)->Client:
         """
         Returns the Ollama client for a chat/generate/create interface

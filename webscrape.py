@@ -9,7 +9,7 @@ class ScrapeTool(Toolkit):
         super().__init__(name="scrape tools")
         self.url = url
 
-    def getwebsitedata(self)->str:
+    def getwebsitecontent(self)->str:
         """Posts a get request to scrape a website using BeautifulSoup.
         Args:
             None
