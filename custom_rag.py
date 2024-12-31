@@ -37,7 +37,7 @@ def main():
 
 if __name__ == "__main__":
     responses = []
-    with open("results.txt", "w") as file:
-        for i in range(0, 25):
+    with open("results.csv", "w") as file:
+        for i in range(0, 100):
             file.write(main().response + '\n')
     print("Done!")

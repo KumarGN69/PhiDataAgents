@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from phi.agent import Agent
 from phi.model.ollama import Ollama
 from phi.tools.yfinance import YFinanceTools
-from customtools import getnews # importing custom tools
+from custom_tools import getnews # importing custom tools
 
 # Load environment variables from .env file
 load_dotenv()
