@@ -4,7 +4,7 @@ from langchain_ollama import OllamaLLM, OllamaEmbeddings
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from ollama import Client
-from configurations import OUTPUT_FORMAT, MODEL_TEMPERATURE
+from custom_configs import OUTPUT_FORMAT, MODEL_TEMPERATURE
 
 class LLMModel:
     """

@@ -6,8 +6,6 @@ __pycache__/
 .venv/
 .env
 chroma_langchain.db/
-.embedding_exp.py
-.textsplitting_embed_experiment.py
 # C extensions
 *.so
 

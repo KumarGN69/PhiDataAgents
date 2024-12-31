@@ -4,7 +4,7 @@ from phi.agent import Agent
 from phi.model.ollama import Ollama
 from phi.tools.website import WebsiteTools
 from pprint import pprint
-from webscrape import ScrapeTool
+from custom_webscrape import WebScrapeTool
 
 
 WEBSITE = "https://www.rmg.co.uk/stories/topics/why-sky-blue"

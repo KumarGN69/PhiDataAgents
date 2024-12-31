@@ -1,13 +1,14 @@
 from custom_llm import LLMModel
-from configurations import SEARCH_STRING, WEBSITE, PROMPT
-from webscrape import ScrapeTool
+from custom_configs import SEARCH_STRING, WEBSITE, PROMPT
+from custom_webscrape import WebScrapeTool
+
 
 def main():
     # instantiate the custom model and get the handle to it
     model = LLMModel()
 
     # Instantiate the custom phiData ScrapeTool and get the website details
-    scrape_tool = ScrapeTool(url=WEBSITE)
+    scrape_tool = WebScrapeTool(url=WEBSITE)
     response = scrape_tool.getwebsitecontent()
 
     # create embedding, embedd into a vector store
@@ -26,12 +27,17 @@ def main():
     client = model.getclientinterface()
 
     # generate a llm response using client along with the RAG results
-    final_answer = client.generate(
+    generated_content = client.generate(
         model=model.MODEL_NAME,
         prompt=f"{PROMPT} {doclist}. Please answer based on the give context "
     )
 
-    return final_answer
+    return generated_content
+
 
 if __name__ == "__main__":
-    print(main().response)
+    responses = []
+    with open("results.txt", "w") as file:
+        for i in range(0, 25):
+            file.write(main().response + '\n')
+    print("Done!")

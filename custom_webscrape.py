@@ -1,10 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
-from pprint import pprint
 from phi.tools import Toolkit
-from configurations import WEBSITE
-class ScrapeTool(Toolkit):
+class WebScrapeTool(Toolkit):
+    """
+    This class defines a custom webscrape using phiData Toolkit
+    --------------------------------------------------------
+    Methods:
+    getwebsitecontent() :
+        args: None
+        return: Return a document List of the text contexts from the website
 
+    """
     def __init__(self,url:str):
         super().__init__(name="scrape tools")
         self.url = url
@@ -26,14 +32,9 @@ class ScrapeTool(Toolkit):
             soup = BeautifulSoup(response.content, 'html.parser')
             # find all paragraphs in the web content
             p_tags = soup.find_all('p')
-            #Create a list of str
-            webtext_list =[]
-            for tag in p_tags:
-                webtext_list.append(tag.text)
-            # append the paragraph contents into one large string
-            web_text = ''.join(tag.text for tag in p_tags )
-            return webtext_list
 
-# if __name__ == "__main__" :
-#     scrape_tool = ScrapeTool(WEBSITE,"")
-#     print(scrape_tool.getwebsitedata())
+            #Create and return a list of contents from scrapped from the website
+            webcontent_list =[]
+            for tag in p_tags:
+                webcontent_list.append(tag.text)
+            return webcontent_list
