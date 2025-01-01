@@ -12,3 +12,4 @@ certifi~=2024.12.14
 langchain_chroma~=0.1.4
 prettyprint~=0.1.5
 beautifulsoup4~=4.12.3
+deepeval~=2.0.9

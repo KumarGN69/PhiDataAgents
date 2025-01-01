@@ -1,6 +1,8 @@
 from custom_llm import LLMModel
-from custom_configs import SEARCH_STRING, WEBSITE, PROMPT
+from custom_configs import SEARCH_STRING, WEBSITE, PROMPT, RETRIEVED_RESPONSE
 from custom_webscrape import WebScrapeTool
+
+f
 
 
 def main():
@@ -36,8 +38,12 @@ def main():
 
 
 if __name__ == "__main__":
-    responses = []
-    with open("results.csv", "w") as file:
-        for i in range(0, 100):
-            file.write(main().response + '\n')
-    print("Done!")
+    # responses = []
+    # with open("results.csv", "w") as file:
+    #     for i in range(0, 1):
+    #         file.write(main().response + '\n')
+    # print("Done!")
+
+    print(response = main().response)
+
+    

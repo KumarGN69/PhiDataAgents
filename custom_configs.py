@@ -11,6 +11,8 @@ MODEL_TEMPERATURE = 0.0
 TASK_TO_PERFORM = "What is the color of the sky at different times of a day?What are the reasons for it?"
 SEARCH_STRING= " In which year did Wilfred Dowman die? "
 
+RETRIEVED_RESPONSE = "Wilfred Dowman’s premature death in 1936 brought about Cutty Sark’s next move"
+
 PROMPT = (f"Answer the user's query based on the provided context. "
           f"User's query is {SEARCH_STRING}. "
           f"Context: ")
