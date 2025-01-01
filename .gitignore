@@ -8,7 +8,7 @@ __pycache__/
 chroma_langchain.db/
 results.csv
 .deepeval_telemtry.txt
-.deepeval-cache.json
+deepeval-cache.json
 # C extensions
 *.so
 
