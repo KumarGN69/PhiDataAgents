@@ -2,8 +2,6 @@ from custom_llm import LLMModel
 from custom_configs import SEARCH_STRING, WEBSITE, PROMPT, RETRIEVED_RESPONSE
 from custom_webscrape import WebScrapeTool
 
-f
-
 
 def main():
     # instantiate the custom model and get the handle to it
