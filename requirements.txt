@@ -14,3 +14,5 @@ prettyprint~=0.1.5
 beautifulsoup4~=4.12.3
 deepeval~=2.0.9
 aisuite~=0.1.7
+flask~=3.1.0
+
