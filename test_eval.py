@@ -3,7 +3,7 @@ from deepeval.test_case import LLMTestCase
 from deepeval.metrics import AnswerRelevancyMetric
 from custom_rag import main
 
-from custom_configs import SEARCH_STRING, WEBSITE, PROMPT, RETRIEVED_RESPONSE
+from custom_configs import SEARCH_STRING, WEBSITE, SEARCH_PROMPT, RETRIEVED_RESPONSE
 
 def test_answer_relevancy():
         answer_relevancy_metric = AnswerRelevancyMetric(threshold=0.5)

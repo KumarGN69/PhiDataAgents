@@ -1,13 +1,38 @@
 from custom_llm import LLMModel
 
-from custom_webscrape import WebScrapeTool
+from custom_website_load import WebScrapeTool
 
-class CustomRAG:
+class LoadWebsite:
     def __init__(self,website:str,search_str:str,prompt:str):
         self.website = website
         self.search_str = search_str
         self.prompt = prompt
-    def main(self):
+
+    def get_summary(self):
+        model = LLMModel()
+
+        # Instantiate the custom phiData ScrapeTool and get the website details
+        scrape_tool = WebScrapeTool(url=self.website)
+        response = scrape_tool.getwebsitecontent()
+
+        # create embedding, embedd into a vector store
+        vector_store = model.create_vectorstore(response)
+
+        # do a similarity search using the vector store retriever on specific search query
+        doclist = vector_store.get()['documents']
+
+        # get the Ollama Client interface to the model
+        client = model.getclientinterface()
+
+        # generate a llm response using client along with the RAG results
+        generated_content = client.generate(
+            model=model.MODEL_NAME,
+            prompt=f"{self.prompt} {doclist}. Please summarize based on the give context "
+        )
+
+        return generated_content
+
+    def do_similarity_search(self):
         # instantiate the custom model and get the handle to it
         model = LLMModel()
 
