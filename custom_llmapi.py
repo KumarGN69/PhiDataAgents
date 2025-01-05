@@ -5,7 +5,7 @@ import json
 app = Flask(__name__)
 
 @app.route('/api/generate/response/')
-def get_data():
+def generate_response():
     custom_rag = CustomRAG(website=WEBSITE,search_str=SEARCH_STRING,prompt=PROMPT)
     data =  custom_rag.main().response
     return jsonify(data)
