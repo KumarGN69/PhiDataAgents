@@ -27,3 +27,4 @@
   - ~~Create REST APIs~~
   - Write unit tests using pytest
   - Add tools for document loading and reading
+  - Rewrite the classes to separate out RAG and loaders. 
