@@ -9,6 +9,7 @@ class LoadWebsite:
         self.prompt = prompt
 
     def get_summary(self):
+        # instantiate the custom model and get the handle to it
         model = LLMModel()
 
         # Instantiate the custom phiData ScrapeTool and get the website details
@@ -18,7 +19,7 @@ class LoadWebsite:
         # create embedding, embedd into a vector store
         vector_store = model.create_vectorstore(response)
 
-        # do a similarity search using the vector store retriever on specific search query
+        # get the full content from the vector store for summarization
         doclist = vector_store.get()['documents']
 
         # get the Ollama Client interface to the model
