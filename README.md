@@ -11,6 +11,10 @@
   - **_Created a retriever and used similarity as search option_**
   - **_Used the output of the retriever as the context for RAG_**
   - **_Results are consistent after the above changes_**
+  - 
+- _**Changes As of 5th Jan 2025**_
+  - REST APIs for similarity search and summarization added
+  - Added deepeval to evaluate LLM response
 
 ### - ## **_To do_**
 
@@ -20,5 +24,6 @@
   - How to improve the speed and performance of RAG using local models
   - Changes to webscrape to make it generic one for anytype of HTML tags for text content
   - Add ReactJS Front end, Django Bakend for Python
-  - Create REST APIs
+  - ~~Create REST APIs~~
   - Write unit tests using pytest
+  - Add tools for document loading and reading
