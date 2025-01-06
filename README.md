@@ -22,7 +22,7 @@
              - Refer https://python.langchain.com/v0.2/docs/how_to/graph_constructing/ for example
              - 
          - GraphCypherQAChain from langchain_community.chains.graph_qa.cypher can be used to query the GraphDB and get the results
-         -     Refer https://python.langchain.com/docs/tutorials/graph/ for example
+           - Refer https://python.langchain.com/docs/tutorials/graph/ for example
      - How to improve the speed and performance of RAG using local models 
   - **rewrite the custom_rag file into a class**
   - Changes to webscrape to make it generic one for anytype of HTML tags for text content
