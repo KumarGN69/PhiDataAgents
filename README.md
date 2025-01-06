@@ -20,6 +20,7 @@
 
   - Try with different open scource vector DBs other than Chroma
   - **_Is Graph RAG a better implementation?_**
+   - Cypher Query Language and langchain LLMGraphTransformer 
   - **rewrite the custom_rag file into a class**
   - How to improve the speed and performance of RAG using local models
   - Changes to webscrape to make it generic one for anytype of HTML tags for text content
