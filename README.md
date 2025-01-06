@@ -11,8 +11,8 @@
   - **_Used the output of the retriever as the context for RAG_**
   - **_Results are consistent after the above changes_**
   - _**Changes As of 5th Jan 2025**_
-  -   REST APIs for similarity search and summarization added
-  -   Added deepeval to evaluate LLM response
+    - REST APIs for similarity search and summarization added
+    - Added deepeval to evaluate LLM response
 
 ### - ## **_To do_**
   - Try with different open scource vector DBs other than Chroma
