@@ -15,6 +15,11 @@ def generate_summary():
     custom_rag = LoadWebsite(website=WEBSITE, search_str=SEARCH_STRING, prompt=SUMMARIZE_PROMPT)
     data =  custom_rag.get_summary().response
     return jsonify(data)
+@app.route('/api/generate/kg/')
+def generate_knowledge_graph():
+    custom_rag = LoadWebsite(website=WEBSITE, search_str=SEARCH_STRING, prompt=SEARCH_PROMPT)
+    data =  custom_rag.generate_knowledge_graph()
+    return jsonify(data)
 
 if __name__ == "__main__":
     app.run(debug=True)

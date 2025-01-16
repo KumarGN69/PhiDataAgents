@@ -1,6 +1,11 @@
+from langchain_experimental.graph_transformers.llm import LLMGraphTransformer
+from pydantic import BaseModel, Field
 from custom_llm import LLMModel
-
 from custom_website_load import WebScrapeTool
+
+class CustomGraph(BaseModel):
+    nodes:str = Field(description="Key nodes", required=True)
+    relationships:str = Field(description="Relationship", required=True)
 
 class LoadWebsite:
     def __init__(self,website:str,search_str:str,prompt:str):
@@ -8,6 +13,28 @@ class LoadWebsite:
         self.search_str = search_str
         self.prompt = prompt
 
+    def generate_knowledge_graph(self):
+        model = LLMModel()
+
+        # Instantiate the custom phiData ScrapeTool and get the website details
+        scrape_tool = WebScrapeTool(url=self.website)
+        response = scrape_tool.getwebsitecontent()
+
+
+        #llm with structured output
+
+        llm = model.getinstance()
+        structured_llm = llm.with_structured_output(CustomGraph)
+        llm_transformer = LLMGraphTransformer(llm=structured_llm)
+
+        # convert to graph documents
+        graph_documents = llm_transformer.convert_to_graph_documents(response)
+        print(f"Nodes:{graph_documents[0].nodes}")
+        print(f"Relationships:{graph_documents[0].relationships}")
+
+        # return generated_knowledge_graph
+        # return graph_documents
+        return structured_output
     def get_summary(self):
         # instantiate the custom model and get the handle to it
         model = LLMModel()
@@ -65,13 +92,13 @@ class LoadWebsite:
         return generated_content
 
 
-if __name__ == "__main__":
-    # responses = []
-    # with open("results.csv", "w") as file:
-    #     for i in range(0, 1):
-    #         file.write(main().response + '\n')
-    # print("Done!")
-
-    print(response = main().response)
+# if __name__ == "__main__":
+#     # responses = []
+#     # with open("results.csv", "w") as file:
+#     #     for i in range(0, 1):
+#     #         file.write(main().response + '\n')
+#     # print("Done!")
+#
+#     # print(response = main().response)
 
     
