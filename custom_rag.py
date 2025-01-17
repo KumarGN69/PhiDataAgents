@@ -1,5 +1,7 @@
 from langchain_experimental.graph_transformers.llm import LLMGraphTransformer
+from langchain_core.documents.base import Document
 from pydantic import BaseModel, Field
+import json
 from custom_llm import LLMModel
 from custom_website_load import WebScrapeTool
 
@@ -13,28 +15,8 @@ class LoadWebsite:
         self.search_str = search_str
         self.prompt = prompt
 
-    def generate_knowledge_graph(self):
-        model = LLMModel()
-
-        # Instantiate the custom phiData ScrapeTool and get the website details
-        scrape_tool = WebScrapeTool(url=self.website)
-        response = scrape_tool.getwebsitecontent()
 
 
-        #llm with structured output
-
-        llm = model.getinstance()
-        structured_llm = llm.with_structured_output(CustomGraph)
-        llm_transformer = LLMGraphTransformer(llm=structured_llm)
-
-        # convert to graph documents
-        graph_documents = llm_transformer.convert_to_graph_documents(response)
-        print(f"Nodes:{graph_documents[0].nodes}")
-        print(f"Relationships:{graph_documents[0].relationships}")
-
-        # return generated_knowledge_graph
-        # return graph_documents
-        return structured_output
     def get_summary(self):
         # instantiate the custom model and get the handle to it
         model = LLMModel()
@@ -90,8 +72,46 @@ class LoadWebsite:
         )
 
         return generated_content
+    def get_graph(self):
+        model = LLMModel()
 
+        # Instantiate the custom phiData ScrapeTool and get the website details
+        scrape_tool = WebScrapeTool(url=self.website)
+        response = scrape_tool.getwebsitecontent()
 
+        # get the Ollama Client interface to the model
+        client = model.getclientinterface()
+
+        # generate a llm response using client along with the RAG results
+        generated_content = client.generate(
+            model=model.MODEL_NAME,
+            prompt=f"{self.prompt} {response}",
+            format="json"
+        )
+
+        return json.loads(generated_content.response) # returns a json object
+        # return generated_content.response # return a string
+    def generate_knowledge_graph(self):
+        model = LLMModel()
+
+        # Instantiate the custom phiData ScrapeTool and get the website details
+        scrape_tool = WebScrapeTool(url=self.website)
+        response = scrape_tool.getwebsitecontent()
+        response_str = ''.join(response)
+
+        #llm with structured output
+        llm = model.getinstance()
+        # structured_llm = llm.with_structured_output(CustomGraph)
+        llm_transformer = LLMGraphTransformer(llm)
+
+        # convert to graph documents
+        document = Document(page_content=llm.get_graph()) #create document object
+
+        graph_documents = llm_transformer.convert_to_graph_documents(document)
+        print(f"Nodes:{graph_documents[0].nodes}")
+        print(f"Relationships:{graph_documents[0].relationships}")
+
+        return graph_documents
 # if __name__ == "__main__":
 #     # responses = []
 #     # with open("results.csv", "w") as file:
