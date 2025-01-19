@@ -9,6 +9,7 @@ chroma_langchain.db/
 results.csv
 .deepeval_telemtry.txt
 .deepeval-cache.json
+test.py
 # C extensions
 *.so
 

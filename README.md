@@ -1,5 +1,5 @@
 # Custom classes for RAG for local models using Ollama
-### **_Version of 31/Dec/24_**
+### **_Version of 19/Jan/25_**
 - Embedding model used nomic-embed-text with local OllamaEmbeddings
 - llm model used is llama3.2 locally with Ollama
 - RAG implemented using Chroma DB as vector store
@@ -13,14 +13,16 @@
   - _**Changes As of 5th Jan 2025**_
     - REST APIs for similarity search and summarization added
     - Added deepeval to evaluate LLM response
+    - Class based RAG and Webscrape loader
 
 ### - ## **_To do_**
   - Try with different open scource vector DBs other than Chroma
   - **_Is Graph RAG a better implementation?_**
      - Cypher Query Language and langchain LLMGraphTransformer
          - For converting text to Graph and saving use LLMGraphTransformer from package langchain_experimental.graph_transformers.llm
-             - Refer https://python.langchain.com/v0.2/docs/how_to/graph_constructing/ for example
-             - 
+             - ~~Refer https://python.langchain.com/v0.2/docs/how_to/graph_constructing/ for example~~
+             - Does not work with Ollama
+             - Need to check now to convert into Graph documents using Ollama
          - GraphCypherQAChain from langchain_community.chains.graph_qa.cypher can be used to query the GraphDB and get the results
            - Refer https://python.langchain.com/docs/tutorials/graph/ for example
      - How to improve the speed and performance of RAG using local models 
@@ -30,4 +32,5 @@
   - ~~Create REST APIs~~
   - Write unit tests using pytest
   - Add tools for document loading and reading
-  - Rewrite the classes to separate out RAG and loaders. 
+  - Rewrite the classes to separate out RAG and loaders.
+    - _Need to include document loader classes. Currently supports webscraping only_

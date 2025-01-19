@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from langchain_ollama import OllamaLLM, OllamaEmbeddings
+from langchain_ollama.chat_models import ChatOllama
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from ollama import Client
@@ -32,11 +33,22 @@ class LLMModel:
         self.MODEL_NAME = os.getenv("MODEL_NAME")
         self.temperature = MODEL_TEMPERATURE
         self.EMBED_MODEL = os.getenv("EMBEDDING_MODEL")
-    def getinstance(self):
+    def getmodelinstance(self):
         """Return the handle to the specific custom model
         return: OllamaLLM model with requisite configuration
         """
         return OllamaLLM(
+            base_url=self.MODEL_URL,
+            api_key=self.API_KEY,
+            model=self.MODEL_NAME,
+            # format=OUTPUT_FORMAT,
+            temperature=MODEL_TEMPERATURE
+        )
+    def getchatinstance(self):
+        """Return the handle to the specific custom model
+        return: ChatOllama model with requisite configuration
+        """
+        return ChatOllama(
             base_url=self.MODEL_URL,
             api_key=self.API_KEY,
             model=self.MODEL_NAME,
