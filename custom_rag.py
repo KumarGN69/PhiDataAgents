@@ -4,9 +4,10 @@ from pydantic import BaseModel, Field
 from custom_llm import LLMModel
 from custom_website_load import WebScrapeTool
 
-class LoadWebsite:
+class CustomRAG:
     """
-
+    Loads the website and reads the content
+    Does several RAG operations including embedding into a vector DB, summarize, similarity search, generate graphs
 
 
     """
@@ -16,7 +17,7 @@ class LoadWebsite:
         self.prompt = prompt
 
     def get_summary(self):
-        # instantiate the custom model and get the handle to it
+        """instantiate the custom model and get the handle to it"""
         model = LLMModel()
 
         # Instantiate the custom phiData ScrapeTool and get the website details
@@ -41,7 +42,7 @@ class LoadWebsite:
         return generated_content
 
     def do_similarity_search(self):
-        # instantiate the custom model and get the handle to it
+        """instantiate the custom model and get the handle to it"""
         model = LLMModel()
 
         # Instantiate the custom phiData ScrapeTool and get the website details
@@ -71,6 +72,7 @@ class LoadWebsite:
 
         return generated_content
     def generateGraph(self):
+        """generate graph from the content passed to it"""
         model = LLMModel()
 
         # Instantiate the custom phiData ScrapeTool and get the website details

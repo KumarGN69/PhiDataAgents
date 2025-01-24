@@ -1,10 +1,10 @@
 from langchain_experimental.graph_transformers.llm import LLMGraphTransformer
 from langchain_core.documents.base import Document
 from custom_llm import LLMModel
-from custom_rag import LoadWebsite
+from custom_rag import CustomRAG
 from custom_configs import SEARCH_STRING, WEBSITE, SEARCH_PROMPT, RETRIEVED_RESPONSE,SUMMARIZE_PROMPT, GRAPH_EXTRACT_PROMPT
 
-custom_rag = LoadWebsite(website=WEBSITE, search_str=SEARCH_STRING, prompt=SUMMARIZE_PROMPT)
+custom_rag = CustomRAG(website=WEBSITE, search_str=SEARCH_STRING, prompt=SUMMARIZE_PROMPT)
 
 def createDocumentList(data: str)->list:
     """creates list of langchain document objects for the given string"""

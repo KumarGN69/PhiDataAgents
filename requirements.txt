@@ -17,4 +17,6 @@ aisuite~=0.1.7
 flask~=3.1.0
 langchain-experimental~=0.3.4
 json-repair~=0.35.0
+pypdf[all]~=5.1.0
+pydoc-markdown~=4.8.2
 
