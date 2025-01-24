@@ -9,10 +9,9 @@ MODEL_TEMPERATURE = 0.0
 
 #Prompts for the task to be performed
 TASK_TO_PERFORM = "What is the color of the sky at different times of a day?What are the reasons for it?"
-SEARCH_STRING= " What happened on penultimate voyage as Ferreira ? "
+# SEARCH_STRING= " What happened on penultimate voyage as Ferreira ? "
+SEARCH_STRING = "what did captain Wilfred Dowman do when he spotted the famous ship?"
 SUMMARIZE_STRING = "Summarize the article"
-
-RETRIEVED_RESPONSE = "Wilfred Dowman’s premature death in 1936 brought about Cutty Sark’s next move"
 
 SEARCH_PROMPT = (f"Answer the user's query based on the provided context. "
           f"User's query is {SEARCH_STRING}. "
