@@ -38,7 +38,7 @@ class CustomWebRAG:
         # generate a llm response using client along with the RAG results
         generated_content = client.generate(
             model=self.model.MODEL_NAME,
-            prompt=f"{self.prompt} {doclist}. Please summarize based on the give context "
+            prompt=f"{self.prompt} {doclist}"
         )
         # print(type(generated_content.response))
         return generated_content
@@ -61,6 +61,7 @@ class CustomWebRAG:
         )
 
         # do a similarity search using the vector store retriever on specific search query
+
         doclist = retriever.invoke(self.search_str)
 
         # get the Ollama Client interface to the model
@@ -69,7 +70,7 @@ class CustomWebRAG:
         # generate a llm response using client along with the RAG results
         generated_content = client.generate(
             model=self.model.MODEL_NAME,
-            prompt=f"{self.prompt} {doclist}. Please answer based on the give context "
+            prompt=f"{self.prompt} {doclist}"
         )
 
         return generated_content
@@ -98,7 +99,10 @@ class CustomWebRAG:
         documents = [Document(page_content=content) for content in contents]
         return documents
     def generate_knowledge_graph(self):
-        """generates the knowledge graph documents for a given content"""
+        """
+        Generates the knowledge graph documents for a given content
+        LLMGraphTransformer does not work with Ollama based local LLM
+        """
         # model = LLMModel()
 
         # Instantiate the custom phiData ScrapeTool and get the website details

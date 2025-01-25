@@ -13,13 +13,9 @@ TASK_TO_PERFORM = "What is the color of the sky at different times of a day?What
 SEARCH_STRING = "what did captain Wilfred Dowman do when he spotted the famous ship?"
 SUMMARIZE_STRING = "Summarize the article"
 
-SEARCH_PROMPT = (f"Answer the user's query based on the provided context. "
-          f"User's query is {SEARCH_STRING}. "
-          f"Context: ")
+SEARCH_PROMPT = (f"Answer the user's query based on the provided context. Context:")
 
-SUMMARIZE_PROMPT = (f"Summarize based on the provided context. "
-          f"User's query is {SUMMARIZE_STRING}. "
-          f"Context: ")
+SUMMARIZE_PROMPT = "Summarize based on the provided context. Context: "
 
 # GRAPH_EXTRACT_PROMPT = (f"You are an experienced annotator.Extract all entities and the relationships and format the "
 #                         f"output in JSON including the various events, activities, history from the content in")
