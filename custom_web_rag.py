@@ -118,6 +118,7 @@ class CustomWebRAG:
             format=CustomGraph.model_json_schema()
         )
         result = CustomGraph.model_validate_json(generated_content.response)
+        pprint(result.entities)
         return generated_content # return a string
         # return result
 
