@@ -30,7 +30,7 @@ def do_web_search():
     """Create a RAG instance and search the website contents for a given text"""
     url = request.args.get('url')
     search_str = request.args.get('search_str')
-    custom_web_rag = CustomWebRAG(website=url, search_str=search_str, prompt=SEARCH_PROMPT)
+    custom_web_rag = CustomWebRAG(website=WEBSITE, search_str=SEARCH_STRING, prompt=SEARCH_PROMPT)
     data =  custom_web_rag.do_similarity_search().response
     return jsonify(data)
 
@@ -39,9 +39,10 @@ def generate_web_summary():
     """Create a RAG instance and summarize the website contents"""
     url = request.args.get('url')
     search_str = request.args.get('search_str')
-    custom_web_rag = CustomWebRAG(website=url, search_str=search_str, prompt=SUMMARIZE_PROMPT)
+    custom_web_rag = CustomWebRAG(website=WEBSITE, search_str=SEARCH_STRING, prompt=SUMMARIZE_PROMPT)
     data =  custom_web_rag.get_summary().response
     return jsonify(data)
+    # return data 
 
 @app.route('/api/generate/web/graph/')
 def get_web_graph():

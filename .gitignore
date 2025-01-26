@@ -4,7 +4,6 @@ __pycache__/
 *$py.class
 
 .venv/
-.env
 chroma_langchain.db/
 results.csv
 .deepeval_telemtry.txt

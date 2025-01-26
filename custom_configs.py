@@ -32,12 +32,12 @@ Output Format:
 Return the extracted entities and relationships in a structured JSON format as follows 
 
 {
-  "entities": [
+  "Entities": [
     {"name": "Entity1", "type": "Type1"},
     {"name": "Entity2", "type": "Type2"},
     {"name": "Entity3", "type": "Type3"}
   ],
-  "relationships": [
+  "Relationships": [
     {"subject": "Entity1", "predicate": "RelationshipType", "object": "Entity2"},
     {"subject": "Entity2", "predicate": "RelationshipType", "object": "Entity3"}
   ],

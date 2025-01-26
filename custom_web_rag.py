@@ -1,8 +1,34 @@
 from langchain_experimental.graph_transformers.llm import LLMGraphTransformer
 from langchain_core.documents.base import Document
 from pydantic import BaseModel, Field
+from pprint import pprint
 from custom_llm import LLMModel
 from custom_website_load import WebScrapeTool
+
+class Entities(BaseModel):
+  name: str
+  type: str
+
+class Relationships(BaseModel):
+  subject: str
+  predicate: str
+  object : str
+
+class Events(BaseModel):
+  subject: str
+  predicate: str
+  object : str
+
+class History(BaseModel):
+  subject: str
+  predicate: str
+  object : str
+
+class CustomGraph(BaseModel):
+  entities: list[Entities]
+  relationships: list[Relationships]
+  events: list[Events]
+  history: list[History]
 
 class CustomWebRAG:
     """
@@ -89,9 +115,11 @@ class CustomWebRAG:
         generated_content = client.generate(
             model=self.model.MODEL_NAME,
             prompt=f"{self.prompt} {response}",
-            format="json"
+            format=CustomGraph.model_json_schema()
         )
+        result = CustomGraph.model_validate_json(generated_content.response)
         return generated_content # return a string
+        # return result
 
     def createDocumentList(self, contents: list) -> list:
         """creates list of langchain document objects for the given string"""
