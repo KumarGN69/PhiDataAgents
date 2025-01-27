@@ -30,7 +30,8 @@ class LLMModel:
         load_dotenv()
         self.MODEL_URL = os.getenv("BASE_URL")
         self.API_KEY = os.getenv("API_KEY")
-        self.MODEL_NAME = os.getenv("MODEL_NAME")
+        self.MODEL_NAME = os.getenv("INFERENCE_MODEL")
+        self.VISION_MODEL = os.getenv("VISION_MODEL")
         self.temperature = MODEL_TEMPERATURE
         self.EMBED_MODEL = os.getenv("EMBEDDING_MODEL")
     def getmodelinstance(self):
