@@ -11,6 +11,7 @@ results.csv
 test.py
 # C extensions
 *.so
+*.JPG
 
 # Distribution / packaging
 .Python
