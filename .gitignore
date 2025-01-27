@@ -12,6 +12,7 @@ test.py
 # C extensions
 *.so
 *.JPG
+.env
 
 # Distribution / packaging
 .Python
