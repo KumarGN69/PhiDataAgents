@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from custom_web_rag import CustomWebRAG
+from custom_image_read import CustomImageRead
 from custom_configs import SEARCH_STRING, WEBSITE, SEARCH_PROMPT,SUMMARIZE_PROMPT, GRAPH_EXTRACT_PROMPT
 
 from langchain_core.prompts import PromptTemplate
@@ -51,6 +52,12 @@ def get_web_graph():
     data = custom_web_rag.generateGraph().response
     return jsonify(data)
 
+@app.route('/api/image/summary/')
+def get_image_contents():
+    path = request.args.get('path')
+    image_contents = CustomImageRead(path=path)
+    # print(image_contents.readimage())
+    return jsonify(image_contents.readimage().summary)
 
 if __name__ == "__main__":
     app.run(debug=True)
