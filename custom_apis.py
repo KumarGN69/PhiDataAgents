@@ -25,6 +25,8 @@ app = Flask(__name__)
         - Read and generate summary of the webcontents
     /api/generate/web/graph/
         - Read the website contents and generate the knowledge graph based on the defined prompt
+    /api/image/summary
+        - read the image from the path passed as part of api query and summarize
 """
 @app.route('/api/web/search/')
 def do_web_search():
